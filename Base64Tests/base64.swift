@@ -7,18 +7,15 @@
 //
 
 import XCTest
-@testable import unchained
+@testable import Base64
 
 class base64Tests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    var allTests : [(String, () -> Void)] {
+        return [
+            ("testBase64Encode", testBase64Encode),
+            ("testBase64Decode", testBase64Decode)
+        ]
     }
     
     func testBase64Encode() {
@@ -38,22 +35,22 @@ class base64Tests: XCTestCase {
     func testBase64Decode() {
         var result = Base64.decode("SGVsbG8gV29ybGQh")
         result.append(0)
-        var string = String(CString: UnsafePointer<CChar>(result), encoding: NSUTF8StringEncoding)
+        var string = String.fromCString(UnsafePointer<CChar>(result))
         XCTAssert(string == "Hello World!")
         
         result = Base64.decode("SGVsbG8gV29ybGQ=")
         result.append(0)
-        string = String(CString: UnsafePointer<CChar>(result), encoding: NSUTF8StringEncoding)
+        string = String.fromCString(UnsafePointer<CChar>(result))
         XCTAssert(string == "Hello World")
 
         result = Base64.decode("SGVsbG8gWW91IQ==")
         result.append(0)
-        string = String(CString: UnsafePointer<CChar>(result), encoding: NSUTF8StringEncoding)
+        string = String.fromCString(UnsafePointer<CChar>(result))
         XCTAssert(string == "Hello You!")
 
         result = Base64.decode("TnVsbGFtIGlkIGRvbG9yIGlkIG5pYmggdWx0cmljaWVzIHZlaGljdWxhIHV0IGlkIGVsaXQuIERv\r\nbmVjIGlkIGVsaXQgbm9uIG1pIHBvcnRhIGdyYXZpZGEgYXQgZWdldCBtZXR1cy4gTG9yZW0gaXBz\r\ndW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gQ3JhcyBqdXN0\r\nbyBvZGlvLCBkYXBpYnVzIGFjIGZhY2lsaXNpcyBpbiwgZWdlc3RhcyBlZ2V0IHF1YW0u")
         result.append(0)
-        string = String(CString: UnsafePointer<CChar>(result), encoding: NSUTF8StringEncoding)
+        string = String.fromCString(UnsafePointer<CChar>(result))
         XCTAssert(string == "Nullam id dolor id nibh ultricies vehicula ut id elit. Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.")
     }
 }

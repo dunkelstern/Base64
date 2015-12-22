@@ -9,5 +9,9 @@
 import PackageDescription
 
 let package = Package(
-    name: "Base64"
+    name: "Base64",
+    targets: [
+        Target(name:"Base64Tests", dependencies: [.Target(name: "Base64")]),
+        Target(name:"Base64")
+    ]
 )
