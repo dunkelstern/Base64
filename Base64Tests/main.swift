@@ -9,4 +9,4 @@
 import XCTest
 
 print("Starting tests...")
-XCTMain([base64Tests()])
+XCTMain([testCase(base64Tests.allTests)])

@@ -1,2 +1,5 @@
 .build
 Packages/
+.atllbuild/
+bin/
+Base64.sublime-workspace

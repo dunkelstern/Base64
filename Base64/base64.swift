@@ -116,7 +116,7 @@ public class Base64 {
     /// - returns: decoded data
     public class func decode(data: [UInt8], alphabet: Base64Alphabet = .Default) -> [UInt8] {
         // build lookup table for decoding
-        var lookup = [UInt8](count: 255, repeatedValue: 64)
+        var lookup = [UInt8](repeating: 64, count: 255)
         let alpha = alphabet.rawValue.utf8
         var idx = alpha.startIndex
         for i in 0..<alpha.count {
@@ -133,7 +133,7 @@ public class Base64 {
         din.reserveCapacity(4)
 
         // decode quads to triplets
-        var gen = data.generate()
+        var gen = data.makeIterator()
         while let d = gen.next() {
             let val = lookup[Int(d)]
             if val <= 63 {
